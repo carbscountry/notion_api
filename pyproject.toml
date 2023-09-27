@@ -9,6 +9,7 @@ packages = [{include = "notion_to_slack"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 python-dotenv = "^1.0.0"
+schedule = "^1.2.0"
 
 [tool.poetry.group.dev.dependencies]
 requests = "^2.31.0"

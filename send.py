@@ -63,14 +63,14 @@ def get_weekly_report_counts(Member_dict):
     input_date = datetime.datetime.strptime(input_str, '%Y-%m-%d').date()
     if is_this_week(input_date):
       Member_dict[data['results'][lengh]['properties']['作成者']['people'][0]['name']] =+ 1
-  _txt = f"{str(today - datetime.timedelta(days=today.weekday()))}の週\n\n"
+  _txt = f"{str(today - datetime.timedelta(days=today.weekday()))}から{str(today)}の週\n\n"
   for k,v in Member_dict.items():
     _txt = _txt + f'{k}:  {v}回提出\n'
   return _txt
 
 
 
-if __name__ == "__main__":
+def main():
     _dict = get_Member_dict()
     Send_txt = get_weekly_report_counts(_dict)
     client = WebClient(SLACK_API_TOKEN)
@@ -78,4 +78,6 @@ if __name__ == "__main__":
         channel="#サボり通知",
         text=Send_txt,
     )
+if __name__ == "__main__":
+  schedule.every().monday.at(“15:40”).do(main)
 

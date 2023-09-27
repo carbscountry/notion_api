@@ -1,5 +1,7 @@
 FROM python:3.9-buster
 
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ARG work_dir="/workspace"
 #kaggle apiをコンテナに格納
 RUN apt-get update \
@@ -20,7 +22,7 @@ ENV PYTHONUNBUFFERED=1 \
   POETRY_VIRTUALENVS_CREATE=false \
   PYSETUP_PATH="/opt/pysetup"
 # Nodejs の導入
-RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
-RUN apt-get install -y nodejs
+# RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+# RUN apt-get install -y nodejs
 
 RUN pip install poetry
